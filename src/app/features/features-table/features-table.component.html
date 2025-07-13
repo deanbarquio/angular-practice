@@ -1,0 +1,28 @@
+<h2>Features Table</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature_Id</th>
+      <th>Feature_Name</th>
+      <th>Feature_Desc</th>
+      <th>Feature_Status</th>
+      <th>Date_Created</th>
+      <th>is_Deleted</th>
+      <th>Feature_JiraNo</th>
+      <th>Feature_JiraAlias</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let feature of features">
+      <td>{{ feature.Feature_Id }}</td>
+      <td>{{ feature.Feature_Name }}</td>
+      <td>{{ feature.Feature_Desc }}</td>
+      <td>{{ feature.Feature_Status }}</td>
+      <td>{{ feature.Date_Created }}</td>
+      <td>{{ feature.is_Deleted }}</td>
+      <td>{{ feature.Feature_JiraNo }}</td>
+      <td>{{ feature.Feature_JiraAlias }}</td>
+    </tr>
+  </tbody>
+</table>

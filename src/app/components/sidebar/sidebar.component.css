@@ -1,0 +1,19 @@
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  margin: 0.5rem 0;
+}

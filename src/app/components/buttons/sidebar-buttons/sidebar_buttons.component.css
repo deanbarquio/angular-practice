@@ -1,0 +1,19 @@
+.app-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  max-width: 100px;
+}
+
+.app-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.app-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
