@@ -1,0 +1,19 @@
+.users-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.users-section h2 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.users-section p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 1em;
+}

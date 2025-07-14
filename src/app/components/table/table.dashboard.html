@@ -1,15 +1,100 @@
 <table>
   <thead>
     <tr>
+      <th>Photo</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Country</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users, index as i">
-      <td>{{ i + 1 }}</td>
-      <td>{{ user.name }}</td>
+    <tr *ngFor="let user of users" (click)="openUserModal(user)" class="clickable-row">
+      <td>
+        <img [src]="user.picture.thumbnail" [alt]="user.name.first + ' ' + user.name.last" class="user-avatar">
+      </td>
+      <td>{{ user.name.first }} {{ user.name.last }}</td>
       <td>{{ user.email }}</td>
+      <td>{{ user.gender | titlecase }}</td>
+      <td>{{ user.dob.age }}</td>
+      <td>{{ user.location.country }}</td>
     </tr>
   </tbody>
 </table>
+
+<!-- User Details Modal -->
+<div *ngIf="showModal" class="modal-overlay" (click)="onModalClick($event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>User Details</h2>
+      <button class="close-button" (click)="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" *ngIf="selectedUser">
+      <div class="user-profile-section">
+        <img [src]="selectedUser.picture.large" [alt]="selectedUser.name.first + ' ' + selectedUser.name.last" class="user-profile-image">
+        <div class="user-basic-info">
+          <h3>{{ selectedUser.name.title }} {{ selectedUser.name.first }} {{ selectedUser.name.last }}</h3>
+          <p class="user-email">{{ selectedUser.email }}</p>
+        </div>
+      </div>
+      
+      <div class="user-details-grid">
+        <div class="user-detail-row">
+          <label>Gender:</label>
+          <span>{{ selectedUser.gender | titlecase }}</span>
+        </div>
+        <div class="user-detail-row">
+          <label>Age:</label>
+          <span>{{ selectedUser.dob.age }} years old</span>
+        </div>
+        <div class="user-detail-row">
+          <label>Date of Birth:</label>
+          <span>{{ selectedUser.dob.date | date:'mediumDate' }}</span>
+        </div>
+        <div class="user-detail-row">
+          <label>Phone:</label>
+          <span>{{ selectedUser.phone }}</span>
+        </div>
+        <div class="user-detail-row">
+          <label>Cell:</label>
+          <span>{{ selectedUser.cell }}</span>
+        </div>
+        <div class="user-detail-row">
+          <label>Username:</label>
+          <span>{{ selectedUser.login.username }}</span>
+        </div>
+        <div class="user-detail-row">
+          <label>Nationality:</label>
+          <span>{{ selectedUser.nat }}</span>
+        </div>
+        <div class="user-detail-row">
+          <label>Registered:</label>
+          <span>{{ selectedUser.registered.date | date:'mediumDate' }} ({{ selectedUser.registered.age }} years ago)</span>
+        </div>
+      </div>
+
+      <div class="location-section">
+        <h4>Location</h4>
+        <div class="location-details">
+          <p><strong>Address:</strong> {{ selectedUser.location.street.number }} {{ selectedUser.location.street.name }}</p>
+          <p><strong>City:</strong> {{ selectedUser.location.city }}</p>
+          <p><strong>State:</strong> {{ selectedUser.location.state }}</p>
+          <p><strong>Country:</strong> {{ selectedUser.location.country }}</p>
+          <p><strong>Postcode:</strong> {{ selectedUser.location.postcode }}</p>
+        </div>
+      </div>
+
+      <div class="id-section" *ngIf="selectedUser.id.value">
+        <h4>Identification</h4>
+        <div class="id-details">
+          <p><strong>ID Type:</strong> {{ selectedUser.id.name }}</p>
+          <p><strong>ID Number:</strong> {{ selectedUser.id.value }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

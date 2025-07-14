@@ -2,11 +2,13 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 2rem;
-  border: 1px solid #ccc;
+  border: 1px solid #233d11;
   border-radius: 8px;
+  background-color: #f0f0f0;
 }
 .login-container input {
   display: block;
   width: 100%;
   margin-bottom: 1rem;
+
 }

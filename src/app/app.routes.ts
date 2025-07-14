@@ -4,6 +4,7 @@ import { DASHBOARD_ROUTES } from './dashboard/dashboard.routes';
 import { LayoutComponent } from './main-layout/layout.component';
 import { PROFILE_ROUTES } from './profile/profile.routes';
 import { FEATURES_ROUTES } from './features/features.routes';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -11,6 +12,8 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    // canActivate: [AuthGuard],   ##this is for future use, with protected routes
+    
     children: [
       { path: 'dashboard', children: DASHBOARD_ROUTES },
       { path: 'profile', children: PROFILE_ROUTES },
@@ -18,4 +21,8 @@ export const routes: Routes = [
       // Add other pages here
     ],
   },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  }
 ];

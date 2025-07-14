@@ -1,0 +1,115 @@
+<table>
+    <thead>
+        <tr>
+            <th>Cat Name</th>
+            <th>Vetstreet URL</th>
+            <th>VCA Hospitals URL</th>
+            <th>Temperament</th>
+            <th>Origin</th>
+            <th>Country Codes</th>
+            <th>Country Code</th>
+            <th>Description</th>
+            <th>Life Span</th>
+            <th>Indoor</th>
+            <th>Lap</th>
+            <th>Alt Names</th>
+            <th>Adaptability</th>
+            <th>Affection Level</th>
+            <th>Child Friendly</th>
+            <th>Dog Friendly</th>
+            <th>Energy Level</th>
+            <th>Grooming</th>
+            <th>Health Issues</th>
+            <th>Intelligence</th>
+            <th>Shedding Level</th>
+            <th>Social Needs</th>
+            <th>Stranger Friendly</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let feature of paginatedFeatures" (click)="openFeatureModal(feature)" class="clickable-row">
+            <td [title]="feature.name">{{ feature.name }}</td>
+            <td [title]="feature.vetstreet_url">{{ feature.vetstreet_url }}</td>
+            <td [title]="feature.vcahospitals_url">{{ feature.vcahospitals_url }}</td>
+            <td [title]="feature.temperament">{{ feature.temperament }}</td>
+            <td [title]="feature.origin">{{ feature.origin }}</td>
+            <td [title]="feature.country_codes">{{ feature.country_codes }}</td>
+            <td [title]="feature.country_code">{{ feature.country_code }}</td>
+            <td [title]="feature.description">{{ feature.description }}</td>
+            <td [title]="feature.life_span">{{ feature.life_span }}</td>
+            <td [title]="feature.indoor">{{ feature.indoor }}</td>
+            <td [title]="feature.lap">{{ feature.lap }}</td>
+            <td [title]="feature.alt_names">{{ feature.alt_names }}</td>
+            <td [title]="feature.adaptability">{{ feature.adaptability }}</td>
+            <td [title]="feature.affection_level">{{ feature.affection_level }}</td>
+            <td [title]="feature.child_friendly">{{ feature.child_friendly }}</td>
+            <td [title]="feature.dog_friendly">{{ feature.dog_friendly }}</td>
+            <td [title]="feature.energy_level">{{ feature.energy_level }}</td>
+            <td [title]="feature.grooming">{{ feature.grooming }}</td>
+            <td [title]="feature.health_issues">{{ feature.health_issues }}</td>
+            <td [title]="feature.intelligence">{{ feature.intelligence }}</td>
+            <td [title]="feature.shedding_level">{{ feature.shedding_level }}</td>
+            <td [title]="feature.social_needs">{{ feature.social_needs }}</td>
+            <td [title]="feature.stranger_friendly">{{ feature.stranger_friendly }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="pagination-controls">
+  <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+</div>
+
+
+<div *ngIf="showModal" class="modal-overlay" (click)="onModalClick($event)">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Feature Details</h2>
+            <button class="close-button" (click)="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" *ngIf="selectedFeature">
+            <div class="feature-profile-section">
+                <img *ngIf="selectedFeature.reference_image_id" [src]="'https://cdn2.thecatapi.com/images/' + selectedFeature.reference_image_id + '.jpg'" [alt]="selectedFeature.name" class="feature-profile-image">
+                <div class="feature-basic-info">
+                    <h3>{{ selectedFeature.name }}</h3>
+                    <p class="feature-description">{{ selectedFeature.description }}</p>
+                    <p><strong>Life Span:</strong> {{ selectedFeature.life_span }}</p>
+                </div>
+            </div>
+            <div class="feature-details-grid">
+                <div class="feature-detail-row"><label>Temperament:</label> <span>{{ selectedFeature.temperament }}</span></div>
+                <div class="feature-detail-row"><label>Origin:</label> <span>{{ selectedFeature.origin }}</span></div>
+                <div class="feature-detail-row"><label>Country Codes:</label> <span>{{ selectedFeature.country_codes }}</span></div>
+                <div class="feature-detail-row"><label>Country Code:</label> <span>{{ selectedFeature.country_code }}</span></div>
+                <div class="feature-detail-row"><label>Weight:</label> <span>Imperial: {{ selectedFeature.weight?.imperial }}, Metric: {{ selectedFeature.weight?.metric }}</span></div>
+                <div class="feature-detail-row"><label>Indoor:</label> <span>{{ selectedFeature.indoor }}</span></div>
+                <div class="feature-detail-row"><label>Lap:</label> <span>{{ selectedFeature.lap }}</span></div>
+                <div class="feature-detail-row"><label>Alt Names:</label> <span>{{ selectedFeature.alt_names }}</span></div>
+                <div class="feature-detail-row"><label>Adaptability:</label> <span>{{ selectedFeature.adaptability }}</span></div>
+                <div class="feature-detail-row"><label>Affection Level:</label> <span>{{ selectedFeature.affection_level }}</span></div>
+                <div class="feature-detail-row"><label>Child Friendly:</label> <span>{{ selectedFeature.child_friendly }}</span></div>
+                <div class="feature-detail-row"><label>Dog Friendly:</label> <span>{{ selectedFeature.dog_friendly }}</span></div>
+                <div class="feature-detail-row"><label>Energy Level:</label> <span>{{ selectedFeature.energy_level }}</span></div>
+                <div class="feature-detail-row"><label>Grooming:</label> <span>{{ selectedFeature.grooming }}</span></div>
+                <div class="feature-detail-row"><label>Health Issues:</label> <span>{{ selectedFeature.health_issues }}</span></div>
+                <div class="feature-detail-row"><label>Intelligence:</label> <span>{{ selectedFeature.intelligence }}</span></div>
+                <div class="feature-detail-row"><label>Shedding Level:</label> <span>{{ selectedFeature.shedding_level }}</span></div>
+                <div class="feature-detail-row"><label>Social Needs:</label> <span>{{ selectedFeature.social_needs }}</span></div>
+                <div class="feature-detail-row"><label>Stranger Friendly:</label> <span>{{ selectedFeature.stranger_friendly }}</span></div>
+                <div class="feature-detail-row"><label>Vocalisation:</label> <span>{{ selectedFeature.vocalisation }}</span></div>
+                <div class="feature-detail-row"><label>Experimental:</label> <span>{{ selectedFeature.experimental }}</span></div>
+                <div class="feature-detail-row"><label>Hairless:</label> <span>{{ selectedFeature.hairless }}</span></div>
+                <div class="feature-detail-row"><label>Natural:</label> <span>{{ selectedFeature.natural }}</span></div>
+                <div class="feature-detail-row"><label>Rare:</label> <span>{{ selectedFeature.rare }}</span></div>
+                <div class="feature-detail-row"><label>Rex:</label> <span>{{ selectedFeature.rex }}</span></div>
+                <div class="feature-detail-row"><label>Suppressed Tail:</label> <span>{{ selectedFeature.suppressed_tail }}</span></div>
+                <div class="feature-detail-row"><label>Short Legs:</label> <span>{{ selectedFeature.short_legs }}</span></div>
+                <div class="feature-detail-row"><label>Wikipedia URL:</label> <a [href]="selectedFeature.wikipedia_url" target="_blank">{{ selectedFeature.wikipedia_url }}</a></div>
+                <div class="feature-detail-row"><label>Hypoallergenic:</label> <span>{{ selectedFeature.hypoallergenic }}</span></div>
+                <div class="feature-detail-row"><label>Vetstreet URL:</label> <a [href]="selectedFeature.vetstreet_url" target="_blank">{{ selectedFeature.vetstreet_url }}</a></div>
+                <div class="feature-detail-row"><label>VCA Hospitals URL:</label> <a [href]="selectedFeature.vcahospitals_url" target="_blank">{{ selectedFeature.vcahospitals_url }}</a></div>
+            </div>
+        </div>
+    </div>
+</div>
